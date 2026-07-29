@@ -32,3 +32,73 @@ Jekyllがインストールされている場合、以下のコマンドでロ�
 ```
 bundle exec jekyll serve
 ```
+
+## Notion実装報告システム
+
+タスク完了時の報告を、`docs/reports/` へのmd保存・git push に加えてNotionにも自動投稿する仕組みです。全プロジェクト共通の恒久ルールとして [CLAUDE.md](./CLAUDE.md) にも記載しています。
+
+### 事前準備（環境変数）
+
+以下3つをシェルの起動ファイル（WSL/Linuxは `~/.bashrc`、Macは `~/.zshrc`）に設定し、`source` して有効化します。
+
+| 変数名 | 内容 | 秘密情報か |
+|---|---|---|
+| `NOTION_TOKEN` | Notion Integration Token | **秘密情報。リポジトリ内のいかなるファイルにも書き込まない・コミットしない・出力しない** |
+| `NOTION_PARENT_SHIODOKI` | 本プロジェクト（潮どき）のNotion親ページID | 非秘密 |
+| `NOTION_REPORT_PAGE` | 報告を投稿する親ページID（`notion_report.js` が子ページを作成する先） | 非秘密 |
+
+`NOTION_TOKEN` は会話ログ等に残らないよう、必ず利用者自身のシェル操作で設定してください（AIエージェントに値を渡さない）。
+
+```bash
+echo 'export NOTION_TOKEN="実際のトークン値"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 実行方法
+
+1. 報告内容をJSONファイルとして用意する（例: `docs/reports/_drafts/2026-07-30_day3.json`。このディレクトリは `.gitignore` 対象）。
+
+   ```json
+   {
+     "date": "2026-07-30",
+     "day": 3,
+     "task": "課金実装",
+     "device": "Mac",
+     "summary": ["何を実装したか（1行目）", "どうなったか（2行目）", "補足（3行目まで）"],
+     "results": [{ "item": "課金フロー実装", "status": "成功" }],
+     "decisions": [],
+     "unverified": ["実機での購入テスト"],
+     "compliance": ["トークンを出力・コミットしていない"],
+     "detailLog": ["実行したコマンドや詳細ログの各行"],
+     "handoff": "次に着手すべき内容"
+   }
+   ```
+
+   - `decisions`（要判断）が空配列の場合は自動的に「なし」と表示されます。
+   - タイトルは自動的に `YYYY-MM-DD DayN タスク名 [機種]` の形式で生成されます。
+
+2. 投稿内容を事前確認したい場合（Notionへは送信されません）:
+
+   ```bash
+   node scripts/notion_report.js docs/reports/_drafts/2026-07-30_day3.json --dry-run
+   ```
+
+3. 実際に投稿する:
+
+   ```bash
+   node scripts/notion_report.js docs/reports/_drafts/2026-07-30_day3.json
+   ```
+
+   成功すると作成されたページのIDとURLが標準出力に表示されます。
+
+### トラブルシューティング
+
+| 症状 | 対処 |
+|---|---|
+| `環境変数 NOTION_TOKEN が設定されていません` | `~/.bashrc`（または`~/.zshrc`）に追記後、`source` し忘れていないか確認。新しいシェル/ターミナルを開き直すのも有効。 |
+| `Notion API エラー (HTTP 401)` | トークンが無効、またはIntegrationがそのページ・データベースに接続（Share）されていない。Notion側でIntegrationをページに招待し直す。 |
+| `Notion API エラー (HTTP 404)` | `NOTION_REPORT_PAGE` のページIDが誤っている、またはIntegrationがそのページにアクセスできていない。 |
+| `Notion API エラー (HTTP 400)` | payloadの形式不備。まず `--dry-run` で出力されたJSONを確認する。 |
+| レスポンスのエラー内容が不明 | 独自判断で回避せず、エラー全文をそのまま報告して停止する（CLAUDE.md参照）。 |
+
+`Notion-Version` ヘッダーは [公式ドキュメント](https://developers.notion.com/reference/versioning) 記載の最新値（本スクリプト作成時点: `2026-03-11`）を `scripts/notion_report.js` 内で固定値として使用しています。Notion側でバージョンが更新された場合は、この値を更新してください。
