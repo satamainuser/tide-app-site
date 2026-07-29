@@ -1,0 +1,109 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>利用規約｜{{ site.app_name }}</title>
+<meta name="description" content="{{ site.app_name }}の利用規約">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.app_name }}</a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">紹介</a></li>
+        <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+        <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+        <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+        <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>利用規約</h1>
+  <p class="lede updated">最終更新日：2026年7月29日</p>
+
+  <p>
+    本利用規約（以下「本規約」）は、{{ site.app_name }}（以下「本アプリ」）の利用条件を定めるものです。
+    利用者は本アプリをダウンロード・利用した時点で、本規約に同意したものとみなします。
+  </p>
+
+  <h2>1. 表示情報の位置付け</h2>
+  <p>
+    本アプリは、気象庁が発表する潮汐等のデータを取得し、そのまま画面上に表示するものです。
+    本アプリは、当該データをもとに海況・釣行の安全性を判定・保証するものではありません。
+  </p>
+
+  <h2>2. 海況判断の責任</h2>
+  <p>
+    釣行の可否、実施場所、実施時間帯などの判断は、必ず利用者ご自身の責任において行ってください。
+    本アプリの表示内容は判断材料の一つに過ぎず、最終的な意思決定を代替するものではありません。
+  </p>
+
+  <div class="notice">
+    <strong>注意喚起</strong>
+    気象庁等の公的機関から気象警報・注意報・高波警報等が発表されている場合は、その内容を優先し、
+    釣行を控えるなど慎重な行動を心がけてください。
+  </div>
+
+  <h2>3. データの正確性・完全性について</h2>
+  <p>
+    本アプリが表示するデータは、取得元の発表内容に基づきますが、通信状況やデータ更新のタイミング等により、
+    実際の状況と異なる場合があります。本アプリは、表示するデータの正確性・完全性・最新性についていかなる保証も行いません。
+  </p>
+
+  <h2>4. 免責事項</h2>
+  <p>
+    本アプリの利用、または本アプリが表示する情報を利用者が参照したことにより生じたいかなる損害（人身、財産、機会損失等を含みますがこれらに限りません）についても、
+    開発者は責任を負わないものとします。ただし、法令により免責が認められない場合はこの限りではありません。
+  </p>
+
+  <h2>5. 釣果記録機能について</h2>
+  <p>
+    利用者が本アプリ内で記録する釣果データ（位置情報・写真・メモ等）の管理は利用者ご自身の責任で行っていただきます。
+    詳細は<a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a>をご確認ください。
+  </p>
+
+  <h2>6. 禁止事項</h2>
+  <ul>
+    <li>本アプリの逆コンパイル、逆アセンブル、リバースエンジニアリング</li>
+    <li>本アプリの運営を妨害する行為</li>
+    <li>法令または公序良俗に違反する行為</li>
+  </ul>
+
+  <h2>7. 規約の変更</h2>
+  <p>
+    本規約の内容は、法令の変更やアプリの機能追加等に伴い、予告なく変更される場合があります。変更後の内容は本ページに掲載した時点で効力を生じるものとします。
+  </p>
+
+  <h2>8. お問い合わせ</h2>
+  <p>
+    本規約に関するお問い合わせは、以下のGitHubリポジトリのIssueにて承っております。
+  </p>
+  <p>
+    <a href="{{ site.github_issues }}">{{ site.github_issues }}</a>
+  </p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+      <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+      <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+      <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      <li><a href="{{ site.github_repo }}">GitHubリポジトリ</a></li>
+    </ul>
+    <p>&copy; {{ site.app_name }}</p>
+  </div>
+</footer>
+
+</body>
+</html>

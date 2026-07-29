@@ -1,0 +1,13 @@
+# GitHub Pages / Jekyll 設定
+# アプリ名はここに集約。名称変更時は app_name (と title) だけ差し替えれば全ページに反映される。
+app_name: "潮どき"
+title: "潮どき"
+description: "潮汐・満干見と釣果記録を管理するアプリの紹介サイト"
+github_repo: "https://github.com/satamainuser/tide-app-site"
+github_issues: "https://github.com/satamainuser/tide-app-site/issues"
+
+# 個人開発者情報（未確定項目はテンプレート側で「後日記入」と表示）
+contact_note: "お問い合わせはGitHubリポジトリのIssueにて承っております。"
+
+markdown: kramdown
+plugins: []

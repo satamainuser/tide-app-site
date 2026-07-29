@@ -1,0 +1,83 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>サポート｜{{ site.app_name }}</title>
+<meta name="description" content="{{ site.app_name }}のサポートページ">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.app_name }}</a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">紹介</a></li>
+        <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+        <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+        <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+        <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>サポート</h1>
+  <p class="lede">{{ site.app_name }}のご利用に関するお問い合わせ・よくある質問をまとめています。</p>
+
+  <h2>お問い合わせ</h2>
+  <p>
+    不具合のご報告やご質問は、以下のGitHubリポジトリのIssueにて承っております。
+  </p>
+  <p>
+    <a href="{{ site.github_issues }}">{{ site.github_issues }}</a>
+  </p>
+
+  <h2>よくある質問</h2>
+
+  <div class="faq-item">
+    <p class="q">記録した釣果データはどこに保存されますか？</p>
+    <p class="a">端末およびご自身が管理するストレージ領域に保存されます。詳細は<a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a>をご確認ください。</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="q">潮汐データはどこから取得していますか？</p>
+    <p class="a"><span class="placeholder">後日記入</span></p>
+  </div>
+
+  <div class="faq-item">
+    <p class="q">アプリが正しく動作しません。どうすればよいですか？</p>
+    <p class="a"><span class="placeholder">後日記入</span></p>
+  </div>
+
+  <div class="faq-item">
+    <p class="q">課金・購入に関する問い合わせはどこにすればよいですか？</p>
+    <p class="a"><span class="placeholder">後日記入</span></p>
+  </div>
+
+  <div class="faq-item">
+    <p class="q">データを削除したい場合はどうすればよいですか？</p>
+    <p class="a"><span class="placeholder">後日記入</span></p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+      <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+      <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+      <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      <li><a href="{{ site.github_repo }}">GitHubリポジトリ</a></li>
+    </ul>
+    <p>&copy; {{ site.app_name }}</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ site.app_name }}｜潮汐と釣果記録のアプリ</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.app_name }}</a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">紹介</a></li>
+        <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+        <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+        <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+        <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <span class="badge">開発中・準備ページ</span>
+    <h1>{{ site.app_name }}</h1>
+    <p class="lede">潮の満ち引きを確認しながら、釣行の記録を自分の手元に残せるアプリです。</p>
+  </div>
+
+  <div class="card">
+    <p>
+      {{ site.app_name }}は、気象庁が発表する潮汐に関する情報を表示し、釣行の釣果（日時・場所・写真など）を記録・管理できるアプリです。
+      記録した内容は端末とユーザー自身のストレージ領域にのみ保存され、開発者や第三者がアクセスすることはありません。
+    </p>
+    <p>
+      本アプリは潮汐情報の「表示」および釣果の「記録」を目的としたものであり、海況の安全性を判定するものではありません。
+      ご利用にあたっては<a href="{{ '/terms.html' | relative_url }}">利用規約</a>を必ずご確認ください。
+    </p>
+  </div>
+
+  <h2>主な機能</h2>
+  <div class="features">
+    <div class="card">
+      <h3>潮汐カレンダー</h3>
+      <p>気象庁発表の潮汐データをもとに、満潮・干潮の時刻を確認できます。</p>
+    </div>
+    <div class="card">
+      <h3>釣果記録</h3>
+      <p>日時・場所・魚種・写真などを記録し、あとから振り返ることができます。</p>
+    </div>
+    <div class="card">
+      <h3>ローカル保存</h3>
+      <p>記録データは端末とユーザー自身のストレージ領域に保存され、外部に送信されません。</p>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>ご利用にあたっての注意</strong>
+    本アプリが表示する情報は釣行の判断を保証・断定するものではありません。海況の最終的な判断は利用者ご自身の責任で行ってください。
+    詳細は<a href="{{ '/terms.html' | relative_url }}">利用規約</a>をご覧ください。
+  </div>
+
+  <h2>ダウンロード</h2>
+  <p>
+    現在準備中です。App Store / Google Play での配信開始時に、こちらのページからリンクを追加いたします。
+  </p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+      <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+      <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+      <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      <li><a href="{{ site.github_repo }}">GitHubリポジトリ</a></li>
+    </ul>
+    <p>&copy; {{ site.app_name }}</p>
+  </div>
+</footer>
+
+</body>
+</html>

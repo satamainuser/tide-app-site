@@ -1,0 +1,99 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>プライバシーポリシー｜{{ site.app_name }}</title>
+<meta name="description" content="{{ site.app_name }}のプライバシーポリシー">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.app_name }}</a>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">紹介</a></li>
+        <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+        <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+        <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+        <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>プライバシーポリシー</h1>
+  <p class="lede updated">最終更新日：2026年7月29日</p>
+
+  <p>
+    {{ site.app_name }}（以下「本アプリ」）は、利用者のプライバシーを尊重し、以下の方針に基づいて情報を取り扱います。
+  </p>
+
+  <h2>1. 取得・保存する情報</h2>
+  <p>
+    本アプリの釣果記録機能で入力・保存される位置情報や写真等のデータは、利用者の端末内、および利用者ご自身が管理するストレージ領域
+    （端末の写真アプリのライブラリや、利用者自身のアカウントに紐づくクラウドストレージ等）にのみ保存されます。
+    これらのデータが開発者が管理するサーバーへ送信されることはありません。
+  </p>
+
+  <h2>2. 第三者への提供</h2>
+  <p>
+    本アプリは、利用者の記録データ（位置情報・写真・釣果内容等）を第三者に提供することはありません。
+  </p>
+
+  <h2>3. アクセス解析・トラッキング</h2>
+  <p>
+    本アプリでは、アクセス解析ツールおよび広告トラッキングの類は使用していません。利用者の行動データを収集・分析することはありません。
+  </p>
+
+  <h2>4. 気象庁データの取得について</h2>
+  <p>
+    本アプリが表示する潮汐情報は気象庁が発表するデータを取得・表示するものです。この通信は情報の表示のみを目的としており、
+    利用者個人を特定する情報を含みません。
+  </p>
+
+  <h2>5. 課金について</h2>
+  <p>
+    本アプリ内で課金機能を提供する場合、決済処理はApple（App Store）またはGoogle（Google Play）の課金システムを通じて行われます。
+    クレジットカード情報等の決済情報を本アプリまたは開発者が直接取得・保存することはありません。
+  </p>
+
+  <h2>6. データの削除</h2>
+  <p>
+    釣果記録データは利用者ご自身の端末・ストレージ領域に保存されているため、アプリ内の削除操作、または端末の設定から削除できます。
+  </p>
+
+  <h2>7. お問い合わせ</h2>
+  <p>
+    本ポリシーに関するお問い合わせは、以下のGitHubリポジトリのIssueにて承っております。
+  </p>
+  <p>
+    <a href="{{ site.github_issues }}">{{ site.github_issues }}</a>
+  </p>
+
+  <h2>8. 本ポリシーの変更</h2>
+  <p>
+    本ポリシーの内容は、法令の変更やアプリの機能追加等に伴い、予告なく変更される場合があります。変更後の内容は本ページに掲載した時点で効力を生じるものとします。
+  </p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="{{ '/terms.html' | relative_url }}">利用規約</a></li>
+      <li><a href="{{ '/privacy.html' | relative_url }}">プライバシーポリシー</a></li>
+      <li><a href="{{ '/support.html' | relative_url }}">サポート</a></li>
+      <li><a href="{{ '/tokushoho.html' | relative_url }}">特定商取引法に基づく表記</a></li>
+      <li><a href="{{ site.github_repo }}">GitHubリポジトリ</a></li>
+    </ul>
+    <p>&copy; {{ site.app_name }}</p>
+  </div>
+</footer>
+
+</body>
+</html>
