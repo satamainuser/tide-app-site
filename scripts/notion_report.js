@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Notion実装報告システム: docs/reports/ の報告をNotion配下の子ページとして投稿する。
+// Notion実装報告システム: docs/reports/ の報告を「実装報告」ページ(NOTION_REPORT_PAGE)配下の子ページとして投稿する。
 // NOTION_TOKENの値はいかなる場合も console.log / エラーメッセージへ含めないこと。
+// タイトルは "YYYY-MM-DD HH:MM DayN タスク名 [機種]" 形式。HH:MMは投稿時点のJST。
 
 const NOTION_VERSION = "2026-03-11"; // https://developers.notion.com/reference/versioning
 const NOTION_API = "https://api.notion.com/v1/pages";
@@ -105,8 +106,15 @@ function dividerBlock() {
   return { object: "block", type: "divider", divider: {} };
 }
 
+function jstTimeHHMM() {
+  const jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  const hh = String(jst.getUTCHours()).padStart(2, "0");
+  const mm = String(jst.getUTCMinutes()).padStart(2, "0");
+  return `${hh}:${mm}`;
+}
+
 function buildTitle(report) {
-  return `${report.date} Day${report.day} ${report.task} [${report.device}]`;
+  return `${report.date} ${jstTimeHHMM()} Day${report.day} ${report.task} [${report.device}]`;
 }
 
 function buildChildren(report) {

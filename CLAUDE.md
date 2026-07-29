@@ -10,6 +10,17 @@
 
 区切りの良い単位ごとにコミットし、完了時にpushする。
 
+## Notion環境変数とページ対応（取り違え防止・恒久ルール）
+
+環境変数名とNotion上の実ページ名が紛らわしく、**2026-07-29に一度、値が取り違えて設定されていたことがある**（NOTION_REPORT_PAGEに「潮どき」のID、NOTION_PARENT_SHIODOKIに「実装報告」のIDが入っていた）。**変数名を鵜呑みにせず、疑わしい場合は必ずNotion API（`GET /v1/pages/{id}`のtitleプロパティ）で実際のページ名を確認してから使うこと。**
+
+| 環境変数 | 指すページ名 | ページID | 用途 |
+|---|---|---|---|
+| `NOTION_REPORT_PAGE` | 実装報告 | `3acbfa7be831802cabe3dca4b1dee3e5` | `notion_report.js` が子ページを作成する**唯一の**親。投稿先はこれだけを使う |
+| `NOTION_PARENT_SHIODOKI` | 潮どき | `3acbfa7be831806aba5adf659e258f18` | プロジェクトのトップページ（「実装報告」の親）。**投稿の親としては絶対に使用しない**。将来の別用途のために保持するのみ |
+
+（上表は2026-07-29にNotion APIで実地確認済み。実際のtitleと食い違っている場合は、値が再度入れ替わっている可能性が高いので、先に述べたAPI確認を行うこと。`scripts/notion_report.js` は `process.env.NOTION_REPORT_PAGE` のみを参照する実装になっている。）
+
 ## Notion報告テンプレート（構造厳守）
 
 `scripts/notion_report.js` が自動的にこの構造でブロックを組み立てる。報告JSONの詳細は [README.md](./README.md) を参照。
@@ -21,6 +32,12 @@
 5. 見出し「禁止事項の遵守状況」+ 箇条書き
 6. toggle「詳細ログ」: 長い技術詳細・コマンド出力はすべてこの中に格納する
 7. divider + 見出し「次タスクへの引き継ぎ」
+
+タイトル形式: `YYYY-MM-DD HH:MM Day{N} {タスク名} [{機種}]`（例: `2026-07-29 23:55 Day2 実データ接続 [Mac]`）。`HH:MM` は**投稿時点の日本時間（JST）**を `scripts/notion_report.js` の `jstTimeHHMM()` が自動算出する。
+
+## Notionページの移動について
+
+Notion API の `PATCH /v1/pages/{id}` は `parent` を変更できない（[公式ドキュメント](https://developers.notion.com/reference/patch-page)に明記: "A page's parent cannot be changed."）。誤った親の下にページが作成された場合、APIでの移動は不可能なため、Notion UI上での手動移動（ドラッグ＆ドロップ、または「移動」メニュー）が必要になる。この制約を推測で回避（削除して再作成する等）してはならない。タイトル（`properties`）はAPIで更新可能。
 
 ## 秘密情報の取り扱い
 
