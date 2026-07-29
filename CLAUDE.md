@@ -35,6 +35,10 @@
 
 タイトル形式: `YYYY-MM-DD HH:MM Day{N} {タスク名} [{機種}]`（例: `2026-07-29 23:55 Day2 実データ接続 [Mac]`）。`HH:MM` は**投稿時点の日本時間（JST）**を `scripts/notion_report.js` の `jstTimeHHMM()` が自動算出する。
 
+- **機種ラベルは常に `[WSL]` を使う。** ユーザーに確認を求めない（2026-07-30に恒久指示済み）。
+- **Day番号**: タスク指示文に明記されていればその番号を使う。明記されていなければ、直前の報告から
+  連番で継続すると自分で判断してよい（要確認せず進める）。
+
 ## Notionページの移動について
 
 Notion API の `PATCH /v1/pages/{id}` は `parent` を変更できない（[公式ドキュメント](https://developers.notion.com/reference/patch-page)に明記: "A page's parent cannot be changed."）。誤った親の下にページが作成された場合、APIでの移動は不可能なため、Notion UI上での手動移動（ドラッグ＆ドロップ、または「移動」メニュー）が必要になる。この制約を推測で回避（削除して再作成する等）してはならない。タイトル（`properties`）はAPIで更新可能。
