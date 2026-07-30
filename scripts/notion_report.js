@@ -19,13 +19,17 @@ function usage() {
       '  "task": "課金実装",',
       '  "device": "Mac",',
       '  "summary": ["何を実装したか", "どうなったか", "..."],',
-      '  "results": [{ "item": "項目", "status": "成功|失敗|未実施" }],',
+      '  "results": [{ "item": "項目", "status": "成功|失敗|未実施", "file": "変更したファイル（無ければ省略可）" }],',
+      '  "implementation": [{ "title": "タスク見出し", "lines": ["何を作った/変えたか", "どういう仕組みか", "触った関数", "..."] }],',
       '  "decisions": ["人間の判断が必要な事項（空配列可）"],',
       '  "unverified": ["検証していないこと"],',
       '  "compliance": ["禁止事項の遵守状況"],',
       '  "detailLog": ["詳細ログの行（文字列配列）"],',
       '  "handoff": "次タスクへの引き継ぎ"',
       "}",
+      "",
+      "results の file を省略した項目は「-」と表示される。",
+      "implementation は結果テーブルと「要判断」の間に「実装内容」として挿入される（2026-07-30の報告フォーマット改訂）。",
       "",
       "--dry-run を付けると、Notionへ送信せず組み立てたペイロードを標準出力に表示するのみ。",
     ].join("\n")
@@ -82,12 +86,36 @@ function resultsTable(results) {
     object: "block",
     type: "table",
     table: {
-      table_width: 2,
+      table_width: 3,
       has_column_header: true,
       has_row_header: false,
-      children: [tableRow(["項目", "状態"]), ...rows.map((r) => tableRow([r.item, r.status]))],
+      children: [
+        tableRow(["項目", "状態", "変更したファイル"]),
+        ...rows.map((r) => tableRow([r.item, r.status, r.file || "-"])),
+      ],
     },
   };
+}
+
+// 2026-07-30の報告フォーマット改訂で新設。タスクごとに見出し+平文3〜6行
+// (何を作った/変えたか・どういう仕組みか・どのファイルの何を触ったか)を並べる。
+function implementationSection(implementation) {
+  if (!implementation || !implementation.length) {
+    return [heading2("実装内容"), paragraph("（実装を伴うタスクなし）")];
+  }
+  const blocks = [heading2("実装内容")];
+  for (const item of implementation) {
+    blocks.push({
+      object: "block",
+      type: "heading_3",
+      heading_3: { rich_text: chunkText(item.title || "（見出し未設定）") },
+    });
+    const lines = Array.isArray(item.lines) ? item.lines : item.lines ? [String(item.lines)] : [];
+    for (const line of lines.length ? lines : ["（記述なし）"]) {
+      blocks.push(paragraph(line));
+    }
+  }
+  return blocks;
 }
 
 function toggleBlock(title, childLines) {
@@ -128,6 +156,7 @@ function buildChildren(report) {
     calloutBlock("📋", "blue_background", report.summary),
     heading2("結果"),
     resultsTable(report.results),
+    ...implementationSection(report.implementation),
     heading2("要判断"),
     calloutBlock("⚠️", "red_background", report.decisions),
     heading2("未確認の範囲"),
