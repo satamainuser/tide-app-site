@@ -7,7 +7,7 @@ github_repo: "https://github.com/satamainuser/tide-app-site"
 github_issues: "https://github.com/satamainuser/tide-app-site/issues"
 
 # 個人開発者情報（未確定項目はテンプレート側で「後日記入」と表示）
-contact_note: "お問い合わせはGitHubリポジトリのIssueにて承っております。"
+contact_note: "お問い合わせはアプリ内の メニュー →「お問い合わせ」からのみ承っております。"
 
 markdown: kramdown
 plugins: []
