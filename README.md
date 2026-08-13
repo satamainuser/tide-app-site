@@ -99,6 +99,7 @@ source ~/.bashrc
 | `Notion API エラー (HTTP 401)` | トークンが無効、またはIntegrationがそのページ・データベースに接続（Share）されていない。Notion側でIntegrationをページに招待し直す。 |
 | `Notion API エラー (HTTP 404)` | `NOTION_REPORT_PAGE` のページIDが誤っている、またはIntegrationがそのページにアクセスできていない。 |
 | `Notion API エラー (HTTP 400)` | payloadの形式不備。まず `--dry-run` で出力されたJSONを確認する。 |
+| `body.children[N].toggle.children.length should be ≤ 100` | Notion APIは1ブロックが直接持てる子ブロックを100個までに制限している。`detailLog` が100行を超えると発生していた。2026-08-13以降、`notion_report.js` が「詳細ログ（1/2）」「（2/2）」のようにトグルを自動分割するため、ログを削る必要はない。 |
 | レスポンスのエラー内容が不明 | 独自判断で回避せず、エラー全文をそのまま報告して停止する（CLAUDE.md参照）。 |
 
 `Notion-Version` ヘッダーは [公式ドキュメント](https://developers.notion.com/reference/versioning) 記載の最新値（本スクリプト作成時点: `2026-03-11`）を `scripts/notion_report.js` 内で固定値として使用しています。Notion側でバージョンが更新された場合は、この値を更新してください。

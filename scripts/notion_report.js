@@ -118,16 +118,26 @@ function implementationSection(implementation) {
   return blocks;
 }
 
-function toggleBlock(title, childLines) {
+// Notion API は 1 ブロックが直接持てる子ブロックを 100 個までに制限している。
+// 詳細ログを削らずに収めるため、100 行を超える場合はトグルを複数に分割する。
+const TOGGLE_CHILD_LIMIT = 100;
+
+function toggleBlocks(title, childLines) {
   const lines = childLines && childLines.length ? childLines : ["（詳細ログなし）"];
-  return {
+  const chunks = [];
+  for (let i = 0; i < lines.length; i += TOGGLE_CHILD_LIMIT) {
+    chunks.push(lines.slice(i, i + TOGGLE_CHILD_LIMIT));
+  }
+  return chunks.map((chunk, index) => ({
     object: "block",
     type: "toggle",
     toggle: {
-      rich_text: chunkText(title),
-      children: lines.map((line) => paragraph(line)),
+      rich_text: chunkText(
+        chunks.length > 1 ? `${title}（${index + 1}/${chunks.length}）` : title
+      ),
+      children: chunk.map((line) => paragraph(line)),
     },
-  };
+  }));
 }
 
 function dividerBlock() {
@@ -163,7 +173,7 @@ function buildChildren(report) {
     ...bulletList(report.unverified),
     heading2("禁止事項の遵守状況"),
     ...bulletList(report.compliance),
-    toggleBlock("詳細ログ", detailLog),
+    ...toggleBlocks("詳細ログ", detailLog),
     dividerBlock(),
     heading2("次タスクへの引き継ぎ"),
     paragraph(report.handoff || "なし"),
